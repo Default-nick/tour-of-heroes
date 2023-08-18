@@ -1,8 +1,14 @@
-.heroes{
-    cursor: pointer;
+mat-table{
+    background: white;
+    color: black;
 }
 
-.heroes li.selected{
-    background-color: black;
-    color: white;
+mat-header-cell, mat-cell{
+    color: black;
+}
+
+mat-row:hover{
+    cursor: pointer;
+    background: whitesmoke;
+    font-weight: 700;
 }

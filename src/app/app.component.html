@@ -1,7 +1,6 @@
-<mat-toolbar color="primary">
-  <span>{{title}}</span>
-</mat-toolbar>
+<app-toolbar [title]="title" [menuItems]="menuItems"></app-toolbar>
 
-<div class="content">
-  <app-heroes></app-heroes>
+<div class="content" fxLayoutGap="12px">
+  <router-outlet></router-outlet>
+  <app-messages></app-messages>
 </div>
