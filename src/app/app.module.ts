@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     // app
     CoreModule,
