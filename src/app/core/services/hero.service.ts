@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../models/hero.model';
-import { Observable, tap } from 'rxjs';
+import { Observable, finalize, tap } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -10,6 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 export class HeroService {
   private heroesUrl = `${environment.baseUrl}/heroes`;
+
+  loading = false;
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
@@ -17,15 +20,15 @@ export class HeroService {
 
   // GET /heroes
   getHeroes(): Observable<Hero[]> {
-    return this.http
-      .get<Hero[]>(this.heroesUrl)
-      .pipe(
-        tap((heroes) =>
-          this.log(
-            `fetched ${heroes.length} ${heroes.length > 1 ? 'heroes' : 'hero'}`
-          )
+    this.loading = true;
+    return this.http.get<Hero[]>(this.heroesUrl).pipe(
+      tap((heroes) =>
+        this.log(
+          `fetched ${heroes.length} ${heroes.length > 1 ? 'heroes' : 'hero'}`
         )
-      );
+      ),
+      finalize(() => (this.loading = false))
+    );
   }
 
   // GET /heroes/id
