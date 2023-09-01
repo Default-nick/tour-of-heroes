@@ -18,3 +18,17 @@ mat-row:hover{
     background: whitesmoke;
     font-weight: 700;
 }
+.mat-mdc-header-row{
+    border-bottom: 1px solid black;
+}
+.mat-column-id, .mat-column-actions{
+    display: flex;
+    justify-content: center;
+    max-width: 80px;
+}
+.mat-column-id{
+    border-right: 1px solid currentColor;
+}
+.mat-column-actions{
+    border-left: 1px solid currentColor;
+}
