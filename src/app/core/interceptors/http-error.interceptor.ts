@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { MessageService } from '../services/message.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -19,12 +20,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
+        if (!environment.production) {
+          console.log(err);
+        }
         let errorMsg = '';
 
         if (err.error instanceof ErrorEvent) {
           errorMsg = `Error ${err.error.message}`;
         } else {
-          errorMsg = `Error Code: ${err.status}, Message: ${err.message}`;
+          errorMsg = `Error Code: ${err.status}, Message: ${err.error.error}`;
         }
 
         this.messageService.add(errorMsg);
