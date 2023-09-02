@@ -1,11 +1,18 @@
 import { MenuItem } from './../../models/menu-item.model';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
 })
 export class ToolbarComponent {
-  @Input() title = '';
+  @Input() isLoggedIn: boolean | null = null;
   @Input() menuItems: MenuItem[] = [];
+  @Input() title = '';
+
+  @Output() private logout = new EventEmitter();
+
+  onLogout(): void {
+    this.logout.emit();
+  }
 }
