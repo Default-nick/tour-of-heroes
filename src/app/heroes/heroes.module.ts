@@ -6,6 +6,7 @@ import { MaterialModule } from '../material/material.module';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [HeroesComponent, HeroDetailComponent],
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeroesRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class HeroesModule {}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../models/hero.model';
-import { Observable, finalize, tap } from 'rxjs';
+import { Observable, finalize, tap, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -31,6 +31,22 @@ export class HeroService {
     );
   }
 
+  // GET /heroes?name=term
+  search(term: string): Observable<Hero[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return this.http
+      .get<Hero[]>(`${this.heroesUrl}?name=${term}`)
+      .pipe(
+        tap((heroes) =>
+          heroes.length
+            ? this.log(`found ${heroes.length} hero(es) matching "${term}"`)
+            : this.log(`no hero(es) matching "${term}"`)
+        )
+      );
+  }
+
   // POST /heroes
   create(hero: Hero): Observable<Hero> {
     return this.http
@@ -51,9 +67,9 @@ export class HeroService {
   }
 
   // DELETE /heroes/id
-  delete(hero: Hero): Observable<any> {
+  delete(hero: Hero): Observable<never> {
     return this.http
-      .delete<any>(this.getUrl(hero.id))
+      .delete<never>(this.getUrl(hero.id))
       .pipe(tap((hero) => this.log(`deleted ${this.descAttributes(hero)}`)));
   }
 
