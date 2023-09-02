@@ -21,7 +21,9 @@
         <!-- Buttons -->
         <mat-card-actions>
             <button color="primary" mat-raised-button *ngIf="!isEditing" (click)="create()">Create</button>
-            <button color="primary" mat-raised-button *ngIf="isEditing" (click)="update()">Update</button>
+            <button color="primary" mat-raised-button *ngIf="isEditing" (click)="update()">
+                Update
+            </button>
             <button mat-raised-button (click)="goBack()">Go back</button>
         </mat-card-actions>
     </mat-card>
